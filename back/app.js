@@ -14,11 +14,6 @@ const app = express();
 
 const mongoose = require("mongoose");
 
-// importe les routes
-
-const userRoutes = require("./routes/user");
-const sauceRoutes = require("./routes/sauce");
-
 // importe path qui permet de connaitre le chemin du système de fichier
 
 const path = require("path");
@@ -64,15 +59,6 @@ app.use((req, res, next) => {
 // affiche le corps de la requête
 
 app.use(express.json());
-
-// répond aux requêtes envoyées à "/images"
-
-app.use("/images", express.static(path.join(__dirname, 'images')));
-
-// Utilise les midleware importés depuis notre fichier routes
-
-app.use("/api/auth", userRoutes);
-app.use("/api/sauces", sauceRoutes);
 
 // exporte l'app pour l'utiliser/l'appeler dans les autres fichiers par la suite
 
