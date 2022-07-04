@@ -18,6 +18,9 @@ const mongoose = require("mongoose");
 
 const path = require("path");
 
+// importe les routes
+const userRoutes = require("./routes/user");
+
 // Appel de .env pour utiliser les variables d'environnement (npm install dotenv --save)
 
 /*require('dotenv').config()*/
@@ -59,6 +62,9 @@ app.use((req, res, next) => {
 // affiche le corps de la requête
 
 app.use(express.json());
+
+// utilise les middlewares importés depuis notre fichier routes
+app.use("/api/auth", userRoutes);
 
 // exporte l'app pour l'utiliser/l'appeler dans les autres fichiers par la suite
 
