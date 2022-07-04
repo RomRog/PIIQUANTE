@@ -8,7 +8,7 @@ const app = express();
 
 // importe helmet qui aide à sécuriser l'applications Express en définissant divers en-têtes HTTP
 
-/*const helmet = require("helmet");*/
+const helmet = require("helmet");
 
 // importe Mongoose qui permet d'utiliser des fonctions complète pour intéragir avec la BDD
 
@@ -19,17 +19,18 @@ const mongoose = require("mongoose");
 const path = require("path");
 
 // importe les routes
+
 const userRoutes = require("./routes/user");
 
 // Appel de .env pour utiliser les variables d'environnement (npm install dotenv --save)
 
-/*require('dotenv').config()*/
+require('dotenv').config()
 
 // définit l'accès à la BDD MongoDB (utilise les var d'env pour ne pas transmettre les logs de connexion en clair dans le code)
 
 mongoose
   .connect(
-    'mongodb+srv://RomRog:<password>@atlascluster.n2czjzy.mongodb.net/?retryWrites=true&w=majority',
+    'mongodb+srv://RomRog:CalimerO01@atlascluster.n2czjzy.mongodb.net/?retryWrites=true&w=majority',
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
@@ -54,8 +55,9 @@ app.use((req, res, next) => {
 
   // on indique les méthodes autorisées pour les requêtes HTTP
 
-  res.setHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, PATCH, OPTIONS");
-  /*res.setHeader("Cross-Origin-Resource-Policy","cross-origin");*/
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
   next();
 });
 

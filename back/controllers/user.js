@@ -3,20 +3,31 @@ const bcrypt = require("bcrypt");
 
 // importe le module de création de token
 const jwt = require("jsonwebtoken");
+const PasswordValidator = require('password-validator');
 
 // importation du modèle de donnée d'un user
 const User = require("../models/User");
 
+const schema = new PasswordValidator
+
 // Appel de .env pour utiliser les variables d'environnement (npm install dotenv --save)
 require("dotenv").config();
 
-
 // Expression régulière
-/*const RegExpEmail =
-  /^(([^<()[\]\\.,;:\s@\]+(\.[^<()[\]\\.,;:\s@\]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
-*/
+const RegExpEmail =
+    /^(([^<()[\]\\.,;:\s@\]+(\.[^<()[\]\\.,;:\s@\]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
 
 // controlleur d'inscription d'un utilisateur
+
+schema
+    .is().min(10)               
+    .is().max(50)               
+    .has().uppercase()         
+    .has().lowercase()          
+    .has().digits(3)           
+    .has().not().spaces()      
+    .has().symbols(1)
+    .is().not().oneOf(['Passw0rd', 'Password123', '12345678910']);
 
 exports.signup = (req, res, next) => {
 
