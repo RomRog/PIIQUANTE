@@ -1,7 +1,7 @@
-// on importe mongoose
+//importe mongoose
 const mongoose = require("mongoose");
 
-// on crée notre schèma de donnée pour rendre les entrés dans la BDD plus strictes
+//crée notre schèma de donnée pour rendre les entrés dans la BDD plus strictes
 const sauceSchema = mongoose.Schema({
   userId: { type: String, required: true },
   name: { type: String, required: true },
