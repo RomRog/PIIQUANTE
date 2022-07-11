@@ -21,6 +21,7 @@ const path = require("path");
 // importe les routes
 
 const userRoutes = require("./routes/user");
+const sauceRoutes = require ("./routes/sauce");
 
 // Appel de .env pour utiliser les variables d'environnement (npm install dotenv --save)
 

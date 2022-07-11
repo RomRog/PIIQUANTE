@@ -79,15 +79,10 @@ exports.deleteSauce = (req, res, next) => {
 
 // Gestion des likes d'une sauce
 exports.likeSauce = (req, res, next) => {
-
-    // état du like (1 = like, -1 = dislike et 0 = réinitialisation)
-    const stateLike = req.body.like;
-
-    // id du user qui like/dislike
-    const idLikeUser = req.body.userId;
-
-    // id de la sauce like/dislike
-    const idLikeSauce = req.params.id;
+    let stateLike = req.body.like;
+    let idLikeUser = req.body.userId;
+    let idLikeSauce = req.params.id;
+    console.log(req.body)
 
     // récupère les attributs de la sauce concernée
     Sauce.findOne({ _id: idLikeSauce })
