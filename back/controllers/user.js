@@ -23,7 +23,7 @@ schema
     .is().max(50)               
     .has().uppercase()         
     .has().lowercase()          
-    .has().digits(3)           
+    .has().digits()           
     .has().not().spaces()      
     .has().symbols(1)
     .is().not().oneOf(['Passw0rd', 'Password123', '12345678910']);

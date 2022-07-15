@@ -66,8 +66,14 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
+// répond aux requêtes envoyées à "/images"
+
+app.use('/images', express.static(path.join(__dirname, 'images')))
+
 // utilise les middlewares importés depuis notre fichier routes
+
 app.use("/api/auth", userRoutes);
+app.use("/api/sauces", sauceRoutes);
 
 // exporte l'app pour l'utiliser/l'appeler dans les autres fichiers par la suite
 
