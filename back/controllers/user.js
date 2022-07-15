@@ -19,12 +19,12 @@ const RegExpEmail =
 
 // controlleur d'inscription d'un utilisateur
 schema
-    .is().min(10)               
-    .is().max(50)               
-    .has().uppercase()         
-    .has().lowercase()          
-    .has().digits()           
-    .has().not().spaces()      
+    .is().min(10)
+    .is().max(50)
+    .has().uppercase()
+    .has().lowercase()
+    .has().digits()
+    .has().not().spaces()
     .has().symbols(1)
     .is().not().oneOf(['Passw0rd', 'Password123', '12345678910']);
 
@@ -55,7 +55,7 @@ exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then((user) => {
             if (!user) {
-                return res.status(401).json({ error: "Utilisateur non trouvé !" });
+                return res.status(401).json({ error: "Utilisateur inexistant !" });
             }
             // génère un hash du mdp et le compare à celui associé à l'adresse mail dans la BDD
             bcrypt
@@ -66,7 +66,7 @@ exports.login = (req, res, next) => {
                             .status(401)
                             .json({ error: "Mot de passe incorrect !" });
                     }
-                    // renvoi le userId et un token généré par jwt (contenant l'id et expire dans 24h)
+
                     res.status(200).json({
                         userId: user._id,
                         token: jwt.sign(
@@ -77,6 +77,8 @@ exports.login = (req, res, next) => {
                     });
                 })
                 .catch((error) => res.status(500).json({ error }));
+                console.log(error);
         })
         .catch((error) => res.status(500).json({ error }));
+        console.log(error);
 };
