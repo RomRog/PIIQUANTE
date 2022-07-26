@@ -69,7 +69,7 @@ exports.deleteSauce = (req, res, next) => {
             // utilise fs pour unlink donc suppr le fichier du dossier
             fs.unlink(`images/${filename}`, () => {
                 // supprime l'objet sauce concerné de la base de donnée
-                Sauce.deleteOne({ _id: req.params.id })
+                Sauce.deleteOne({ id: req.params.id })
                     .then(() => res.status(200).json({ message: "Sauce supprimée !" }))
                     .catch((error) => {
                         console.log(error);
