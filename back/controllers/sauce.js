@@ -71,10 +71,16 @@ exports.deleteSauce = (req, res, next) => {
                 // supprime l'objet sauce concerné de la base de donnée
                 Sauce.deleteOne({ _id: req.params.id })
                     .then(() => res.status(200).json({ message: "Sauce supprimée !" }))
-                    .catch((error) => res.status(400).json({ error }));
+                    .catch((error) => {
+                        console.log(error);
+                        res.status(400).json({ error })
+                    });
             });
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch((error) => {
+            console.log(error);
+            res.status(500).json({ error })
+            });
 };
 
 // Gestion des likes d'une sauce

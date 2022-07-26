@@ -30,6 +30,10 @@ schema
 
 exports.signup = (req, res, next) => {
 
+    if (!schema.validate(req.body.password)) {
+        // return error 400
+    }
+
     // utilise bcrypt pour créer un hash du mot de passe tranmis
     bcrypt
         .hash(req.body.password, 10)
@@ -45,13 +49,13 @@ exports.signup = (req, res, next) => {
                 .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
                 .catch((error) => {
                     console.log(error);
-                  res.status(400).json({ error })
+                    res.status(400).json({ error })
                 });
         })
         .catch((error) => {
             console.log(error);
             res.status(500).json({ error })
-    });
+        });
 };
 
 // controlleur de connexion d'un utilisateur
