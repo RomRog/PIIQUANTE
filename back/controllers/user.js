@@ -31,7 +31,8 @@ schema
 exports.signup = (req, res, next) => {
 
     if (!schema.validate(req.body.password)) {
-        // return error 400
+        console.log("inscription invalidé");
+        res.status(400).json({ message: "Inscription invalidé !"});// return error 400
     }
 
     // utilise bcrypt pour créer un hash du mot de passe tranmis
@@ -65,7 +66,7 @@ exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then((user) => {
             if (!user) {
-                return res.status(401).json({ error: "Utilisateur inexistant !" });
+                return res.status(401).json({ message: "Utilisateur inexistant !" });
             }
             // génère un hash du mdp et le compare à celui associé à l'adresse mail dans la BDD
             bcrypt

@@ -31,7 +31,7 @@ require('dotenv').config()
 
 mongoose
   .connect(
-    'mongodb+srv://RomRog:CalimerO01@atlascluster.n2czjzy.mongodb.net/?retryWrites=true&w=majority',
+    'mongodb+srv://userP6:D3akS3zAtksLyxVS@atlascluster.n2czjzy.mongodb.net/?retryWrites=true&w=majority',
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))

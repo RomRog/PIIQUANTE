@@ -1,5 +1,6 @@
 // importation du modèle de donnée d'une sauce
 const Sauce = require("../models/Sauce");
+const fs = require("fs");
 
 // Importation du package Node File Systeme
 
@@ -69,7 +70,7 @@ exports.deleteSauce = (req, res, next) => {
             // utilise fs pour unlink donc suppr le fichier du dossier
             fs.unlink(`images/${filename}`, () => {
                 // supprime l'objet sauce concerné de la base de donnée
-                Sauce.deleteOne({ id: req.params.id })
+                Sauce.deleteOne({ _id: req.params.id })
                     .then(() => res.status(200).json({ message: "Sauce supprimée !" }))
                     .catch((error) => {
                         console.log(error);
