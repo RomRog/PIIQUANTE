@@ -29,35 +29,35 @@ schema
     .is().not().oneOf(['Passw0rd', 'Password123', '12345678910']);
 
 exports.signup = (req, res, next) => {
-
     if (!schema.validate(req.body.password)) {
         console.log("inscription invalidé");
-        res.status(400).json({ message: "Inscription invalidé !"});// return error 400
-    }
+        return res.status(401).json({ message: "Inscription invalidé !" }); // return error 400
+    } else {
+        // utilise bcrypt pour créer un hash du mot de passe tranmis
 
-    // utilise bcrypt pour créer un hash du mot de passe tranmis
-    bcrypt
-        .hash(req.body.password, 10)
-        .then((hash) => {
-            // crée un objet user
-            const user = new User({
-                email: req.body.email,
-                password: hash,
-            });
-            // enregistre le nouveau utilisateur
-            user
-                .save()
-                .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-                .catch((error) => {
-                    console.log(error);
-                    res.status(400).json({ error })
+        bcrypt
+            .hash(req.body.password, 10)
+            .then((hash) => {
+                // crée un objet user
+                const user = new User({
+                    email: req.body.email,
+                    password: hash,
                 });
-        })
-        .catch((error) => {
-            console.log(error);
-            res.status(500).json({ error })
-        });
-};
+                // enregistre le nouveau utilisateur
+                user
+                    .save()
+                    .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
+                    .catch((error) => {
+                        console.log(error);
+                        res.status(400).json({ error });
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ error });
+            });
+    }
+}; 
 
 // controlleur de connexion d'un utilisateur
 
